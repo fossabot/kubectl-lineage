@@ -1,0 +1,46 @@
+apiVersion: krew.googlecontainertools.github.com/v1alpha2
+kind: Plugin
+metadata:
+  name: lineage
+spec:
+  version: {{ .TagName }}
+  homepage: https://github.com/tohjustin/kubectl-lineage
+  shortDescription: Display all dependent resources.
+  description: |
+    This plugin prints a table of dependents of the specified resource.
+  caveats: |
+    * In order to discover all dependents of the specified resource, this plugin
+      requires users to have permission to list all Kubernetes resources at the
+      cluster scope. For users without such permissions, this plugin will then
+      only display dependents from Kubernetes resource that they have access to.
+  platforms:
+  - selector:
+      matchLabels:
+        os: darwin
+        arch: amd64
+    {{addURIAndSha "https://github.com/tohjustin/kubectl-lineage/releases/download/{{ .TagName }}/kubectl-lineage_macos_amd64.tar.gz" .TagName }}
+    bin: kubectl-lineage
+  - selector:
+      matchLabels:
+        os: darwin
+        arch: arm64
+    {{addURIAndSha "https://github.com/tohjustin/kubectl-lineage/releases/download/{{ .TagName }}/kubectl-lineage_macos_arm64.tar.gz" .TagName }}
+    bin: kubectl-lineage
+  - selector:
+      matchLabels:
+        os: linux
+        arch: amd64
+    {{addURIAndSha "https://github.com/tohjustin/kubectl-lineage/releases/download/{{ .TagName }}/kubectl-lineage_linux_amd64.tar.gz" .TagName }}
+    bin: kubectl-lineage
+  - selector:
+      matchLabels:
+        os: linux
+        arch: arm64
+    {{addURIAndSha "https://github.com/tohjustin/kubectl-lineage/releases/download/{{ .TagName }}/kubectl-lineage_linux_arm64.tar.gz" .TagName }}
+    bin: kubectl-lineage
+  - selector:
+      matchLabels:
+        os: windows
+        arch: amd64
+    {{addURIAndSha "https://github.com/tohjustin/kubectl-lineage/releases/download/{{ .TagName }}/kubectl-lineage_windows_amd64.zip" .TagName }}
+    bin: kubectl-lineage.exe
